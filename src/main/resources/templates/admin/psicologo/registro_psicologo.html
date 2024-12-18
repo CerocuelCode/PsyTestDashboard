@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>PsyTest - Nuevo Rol</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon/favicon.ico}" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}" />
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin />
+    <link
+            th:href="@{https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap}"
+            rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/fonts/boxicons.css}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/css/core.css}" class="template-customizer-core-css" />
+    <link rel="stylesheet" th:href="@{/assets/vendor/css/theme-default.css}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" th:href="@{/assets/css/demo.css}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
+    <link rel="stylesheet" th:href="@{/assets/vendor/libs/apex-charts/apex-charts.css}" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script th:src="@{/assets/vendor/js/helpers.js}"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script th:src="@{/assets/js/config.js}"></script>
+</head>
+
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <!-- Inicio Menu Lateral -->
+        <div th:include="admin/webParts/menu :: menuFragment"></div>
+        <!-- Fin Menu Lateral -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+            <!-- Navbar -->
+            <nav
+                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar"
+            >
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <i class="bx bx-menu bx-sm"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <!-- User -->
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img th:src="@{/assets/img/avatars/1.png}" alt class="w-px-40 h-auto rounded-circle" />
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img th:src="@{assets/img/avatars/1.png}" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-semibold d-block">John Doe</span>
+                                                <small class="text-muted">Administrador</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-user me-2"></i>
+                                        <span class="align-middle">Perfil</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-cog me-2"></i>
+                                        <span class="align-middle">Configuración</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="auth-login-basic.html">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Cerrar Sesión</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ User -->
+                    </ul>
+                </div>
+            </nav>
+            <!-- / Navbar -->
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+                <!-- Content -->
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <div class="card mb-4 ">
+                        <h5 class="card-header">Nuevo Psicólogo</h5>
+                        <div class="card-body">
+                            <!--Inicio Formulario de Registro-->
+                            <form th:action="@{/detallepsicologo/registrar}" th:object="${detallepsicologo}" method="POST">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="nombre" class="form-label">Nombre:</label>
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="nombre"
+                                                th:field="*{nombre}"
+                                                maxlength="100"
+                                                oninput="this.value = this.value.toUpperCase();"
+                                                required
+                                        />
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="apellidoPaterno" class="form-label">Apellido Paterno:</label>
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="apellidoPaterno"
+                                                th:field="*{apellidoPaterno}"
+                                                maxlength="70"
+                                                oninput="this.value = this.value.toUpperCase();"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="apellidoMaterno" class="form-label">Apellido Materno:</label>
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="apellidoMaterno"
+                                                th:field="*{apellidoMaterno}"
+                                                maxlength="70"
+                                                oninput="this.value = this.value.toUpperCase();"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="documentoIdentidad" class="form-label">Tipo de Documento Identidad:</label>
+                                        <select id="documentoIdentidad" class="select2 form-select" th:field="*{documentoIdentidad}">
+                                            <option th:value="DNI">DNI</option>
+                                            <option th:value="CDE">CARNET EXTRANJERIA</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="numeroDocumento" class="form-label">Número de Documento:</label>
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="numeroDocumento"
+                                                th:field="*{numeroDocumento}"
+                                                maxlength="20"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
+                                        <input
+                                                class="form-control"
+                                                type="date"
+                                                id="fechaNacimiento"
+                                                th:field="*{fechaNacimiento}"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="genero" class="form-label">Genero:</label>
+                                        <select id="genero" class="select2 form-select" th:field="*{genero}">
+                                            <option th:value="MASCULINO">Masculino</option>
+                                            <option th:value="FEMENINO">Femenino</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="direccion" class="form-label">Dirección:</label>
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="direccion"
+                                                th:field="*{direccion}"
+                                                maxlength="255"
+                                                oninput="this.value = this.value.toUpperCase();"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="telefono" class="form-label">Teléfono:</label>
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="telefono"
+                                                th:field="*{telefono}"
+                                                maxlength="15"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="celular" class="form-label">Celular:</label>
+                                        <input
+                                                class="form-control"
+                                                type="text"
+                                                id="celular"
+                                                th:field="*{celular}"
+                                                maxlength="15"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="correoInstitucional" class="form-label">Correo Institucional:</label>
+                                        <input
+                                                class="form-control"
+                                                type="email"
+                                                id="correoInstitucional"
+                                                th:field="*{correoInstitucional}"
+                                                maxlength="100"
+                                                oninput="this.value = this.value.toUpperCase();"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="correoPersonal" class="form-label">Correo Personal:</label>
+                                        <input
+                                                class="form-control"
+                                                type="email"
+                                                id="correoPersonal"
+                                                th:field="*{correoPersonal}"
+                                                maxlength="100"
+                                                oninput="this.value = this.value.toUpperCase();"
+                                                required
+                                        />
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="cboUsuario" class="form-label">Usuario:</label>
+                                        <select class="form-select" id="cboUsuario" name="cboUsuario" th:field="*{usuario}" required>
+                                            <option value="0">Seleccione un Usuario</option>
+                                            <option th:each="usuario:${usuarios}" th:value="${usuario.id}" th:text="${usuario.usuario}" ></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="estado" class="form-label">Estado:</label>
+                                        <select id="estado" class="select2 form-select" th:field="*{estado}">
+                                            <option th:value="1">Activo</option>
+                                            <option th:value="0">Inactivo</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="submit" name="registrar" class="btn btn-primary me-2" id="registrarButton">Registrar</button>
+                                    <a th:href="@{/detallepsicologo/listar}" class="btn btn-primary">Cancelar</a>
+                                </div>
+                            </form>
+                            <!--Fin Formulario de Registro-->
+                        </div>
+                    </div>
+                </div>
+                <!-- Content -->
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<!-- / Layout wrapper -->
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
+<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
+<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
+<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+<script th:src="@{/assets/vendor/js/menu.js}"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+<!-- Main JS -->
+<script th:src="@{/assets/js/main.js}"></script>
+
+<!-- Page JS -->
+<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer th:src="@{https://buttons.github.io/buttons.js}"></script>
+
+</body>
+</html>

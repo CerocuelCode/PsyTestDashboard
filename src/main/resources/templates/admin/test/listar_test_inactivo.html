@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>PsyTest - Test</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon/favicon.ico}" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}" />
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin />
+    <link
+            th:href="@{https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap}"
+            rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/fonts/boxicons.css}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/css/core.css}" class="template-customizer-core-css" />
+    <link rel="stylesheet" th:href="@{/assets/vendor/css/theme-default.css}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" th:href="@{/assets/css/demo.css}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
+    <link rel="stylesheet" th:href="@{/assets/vendor/libs/apex-charts/apex-charts.css}" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script th:src="@{/assets/vendor/js/helpers.js}"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script th:src="@{/assets/js/config.js}"></script>
+</head>
+
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <!-- Inicio Menu Lateral -->
+        <div th:include="admin/webParts/menu :: menuFragment"></div>
+        <!-- Fin Menu Lateral -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+            <!-- Navbar -->
+            <nav
+                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar"
+            >
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <i class="bx bx-menu bx-sm"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse"><!-- Search -->
+                    <!-- Search -->
+                    <div class="navbar-nav align-items-center">
+                        <div class="nav-item d-flex align-items-center">
+                            <i class="bx bx-search fs-4 lh-0"></i>
+                            <input
+                                    type="text"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Buscar..."
+                                    aria-label="Search..."
+                                    onkeyup="searchTable(this)"
+                            />
+                        </div>
+                    </div>
+                    <!-- /Search -->
+                    <div id="no-results" style="display: none;">Sin resultados</div>
+                    <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <!-- User -->
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img th:src="@{/assets/img/avatars/1.png}" alt class="w-px-40 h-auto rounded-circle" />
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img th:src="@{assets/img/avatars/1.png}" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-semibold d-block">John Doe</span>
+                                                <small class="text-muted">Administrador</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-user me-2"></i>
+                                        <span class="align-middle">Perfil</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-cog me-2"></i>
+                                        <span class="align-middle">Configuración</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="auth-login-basic.html">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Cerrar Sesión</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ User -->
+                    </ul>
+                </div>
+            </nav>
+            <!-- / Navbar -->
+
+            <script>
+                function showModal(event,row) {
+
+                    if (event.target.closest(".dropdown-toggle") || event.target.closest(".dropdown-menu")) {
+                        return; // No hacer nada si el clic proviene del dropdown
+                    }
+
+                    // Obtén los datos del atributo de la fila
+                    const id = row.getAttribute('data-id');
+                    const nombre = row.getAttribute('data-nombre');
+                    const descripcion = row.getAttribute('data-descripcion');
+                    const tipoTest = row.getAttribute('data-tipoTest');
+                    const fechaRegistro = row.getAttribute('data-fechaRegistro');
+                    const horaModificacion = row.getAttribute('data-horaModificacion');
+                    const fechaModificacion = row.getAttribute('data-fechaModificacion');
+                    const estado = row.getAttribute('data-estado');
+
+                    // Asigna los datos a los campos del modal
+                    document.getElementById('modalId').value = id;
+                    document.getElementById('modalNombre').value = nombre;
+                    document.getElementById('modalDescripcion').value = descripcion;
+                    document.getElementById('modalTipoTest').value = tipoTest;
+                    document.getElementById('modalFechaRegistro').value = fechaRegistro;
+                    document.getElementById('modalHoraModificacion').value = horaModificacion;
+                    document.getElementById('modalFechaModificacion').value = fechaModificacion;
+                    document.getElementById('modalHoraModificacion').value = horaModificacion;
+                    // Actualiza el estado en el modal: ACTIVO o INACTIVO
+                    document.getElementById('modalEstado').value = estado === "true" ? "ACTIVO" : "INACTIVO";
+
+                    // Muestra el modal
+                    var myModal = new bootstrap.Modal(document.getElementById('testModal'), {
+                        keyboard: false
+                    });
+                    myModal.show();
+                }
+            </script>
+
+
+            <!-- Inicio Modal -->
+            <div class="modal fade" id="testModal" tabindex="-1" aria-labelledby="testModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="testModalLabel">Detalle del Test</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="modalId" class="form-label">ID:</label>
+                                <input type="text" class="form-control" id="modalId" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modalNombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="modalNombre" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modalDescripcion" class="form-label">Descripción:</label>
+                                <!-- <input type="text" class="form-control" id="modalDescripcion" readonly>-->
+                                <textarea type="text" class="form-control" id="modalDescripcion" readonly></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modalTipoTest" class="form-label">Tipo de Test:</label>
+                                <input type="text" class="form-control" id="modalTipoTest" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modalFechaRegistro" class="form-label">Fecha de Registro:</label>
+                                <input type="text" class="form-control" id="modalFechaRegistro" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modalHoraModificacion" class="form-label">Hora de Modificación:</label>
+                                <input type="text" class="form-control" id="modalHoraModificacion" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modalFechaModificacion" class="form-label">Fecha de Modificación:</label>
+                                <input type="text" class="form-control" id="modalFechaModificacion" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modalEstado" class="form-label">Estado:</label>
+                                <input type="text" class="form-control" id="modalEstado" readonly>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal -->
+
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+                <!-- Content -->
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4">
+                        <span class="text-muted fw-light">Test /</span> Gestión de Test
+                    </h4>
+
+                    <!-- Basic Bootstrap Table -->
+                    <div class="card">
+                        <h5 class="card-header">Test</h5>
+                        <div class="card-body">
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-striped text-center table-hover">
+                                    <!-- Inicio Cabecera -->
+                                    <thead>
+                                    <tr>
+                                        <th><strong>Código</strong></th>
+                                        <th><strong>Nombre</strong></th>
+                                        <th><strong>Tipo de Test</strong></th>
+                                        <th><strong>Ultima Modificación</strong></th>
+                                        <th><strong>Acciones</strong></th>
+                                    </tr>
+                                    </thead>
+                                    <!-- Fin Cabecera -->
+                                    <!-- Inicio Cuerpo de la tabla -->
+                                    <tbody class="table-border-bottom-0">
+                                    <tr th:each="test : ${tests}"
+                                        th:data-id="${test.id}"
+                                        th:data-nombre="${test.nombre}"
+                                        th:data-descripcion="${test.descripcion}"
+                                        th:data-tipoTest="${test.tipoTest.nombre}"
+                                        th:data-fechaRegistro="${test.fechaRegistro}"
+                                        th:data-horaModificacion="${test.horaModificacion}"
+                                        th:data-fechaModificacion="${test.fechaModificacion}"
+                                        th:data-estado="${test.estado}"
+                                        onclick="showModal(event, this)"
+                                    >
+                                        <td th:text="${test.id}" class="py-3"></td>
+                                        <td th:text="${test.nombre}"></td>
+                                        <td th:text="${test.tipoTest.nombre}"></td>
+                                        <td th:text="${test.fechaModificacion}"></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" th:href="@{/test/actualizar/{id}(id=${test.id})}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Editar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <!-- Fin Cuerpo de la tabla -->
+                                </table>
+                            </div>
+                            <br>
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start mt-4">
+                                <a th:href="@{/test/registro}" class="btn btn-primary mb-2 mb-md-0">Registrar Nuevo Test</a>
+                                <a th:href="@{/test_log/listar}" class="btn btn-primary mb-2 mb-md-0">Log Test</a>
+                                <a th:href="@{/test/listar}" class="btn btn-primary mb-2 mb-md-0">Test Activo</a>
+                            </div>
+                        </div>
+                        <!--/ Basic Bootstrap Table -->
+                    </div>
+
+                    <!-- Content -->
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Personal JS -->
+    <script th:src="@{/js/personaljs/busqueda.js}"></script>
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
+    <script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
+    <script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
+    <script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+    <script th:src="@{/assets/vendor/js/menu.js}"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+    <!-- Main JS -->
+    <script th:src="@{/assets/js/main.js}"></script>
+
+    <!-- Page JS -->
+    <script th:src="@{/assets/js/dashboards-analytics.js}"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer th:src="@{https://buttons.github.io/buttons.js}"></script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>PsyTest - Psicólogos</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/img/favicon/favicon.ico}" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}" />
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin />
+    <link
+            th:href="@{https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap}"
+            rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/fonts/boxicons.css}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/css/core.css}" class="template-customizer-core-css" />
+    <link rel="stylesheet" th:href="@{/assets/vendor/css/theme-default.css}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" th:href="@{/assets/css/demo.css}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
+    <link rel="stylesheet" th:href="@{/assets/vendor/libs/apex-charts/apex-charts.css}" />
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/tables.css}">
+
+    <!-- Helpers -->
+    <script th:src="@{/assets/vendor/js/helpers.js}"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script th:src="@{/assets/js/config.js}"></script>
+</head>
+
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+
+        <!-- Inicio Menu Lateral -->
+        <div th:include="admin/webParts/menu :: menuFragment"></div>
+        <!-- Fin Menu Lateral -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+            <!-- Navbar -->
+            <nav
+                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar"
+            >
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <i class="bx bx-menu bx-sm"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse"><!-- Search -->
+                    <!-- Search -->
+                    <div class="navbar-nav align-items-center">
+                        <div class="nav-item d-flex align-items-center">
+                            <i class="bx bx-search fs-4 lh-0"></i>
+                            <input
+                                    type="text"
+                                    class="form-control border-0 shadow-none"
+                                    placeholder="Buscar..."
+                                    aria-label="Search..."
+                                    onkeyup="searchTable(this)"
+                            />
+                        </div>
+                    </div>
+                    <!-- /Search -->
+                    <div id="no-results" style="display: none;">Sin resultados</div>
+                    <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <!-- User -->
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img th:src="@{/assets/img/avatars/1.png}" alt class="w-px-40 h-auto rounded-circle" />
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img th:src="@{assets/img/avatars/1.png}" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-semibold d-block">John Doe</span>
+                                                <small class="text-muted">Administrador</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-user me-2"></i>
+                                        <span class="align-middle">Perfil</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-cog me-2"></i>
+                                        <span class="align-middle">Configuración</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="auth-login-basic.html">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Cerrar Sesión</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ User -->
+                    </ul>
+                </div>
+            </nav>
+            <!-- / Navbar -->
+
+            <!-- Inicio Script Modal -->
+            <script>
+                function showModal(event, row) {
+                    if (event.target.closest(".dropdown-toggle") || event.target.closest(".dropdown-menu")) {
+                        return; // No hacer nada si el clic proviene del dropdown
+                    }
+                    // Obtén los datos del atributo de la fila
+                    const id = row.getAttribute('data-id');
+                    const nombre = row.getAttribute('data-nombre');
+                    const apellidoPaterno = row.getAttribute('data-apellidoPaterno');
+                    const apellidoMaterno = row.getAttribute('data-apellidoMaterno');
+                    const foto = row.getAttribute('data-foto');
+                    const documentoIdentidad = row.getAttribute('data-documentoIdentidad');
+                    const numeroDocumento = row.getAttribute('data-numeroDocumento');
+                    const fechaNacimiento = row.getAttribute('data-fechaNacimiento');
+                    const genero = row.getAttribute('data-genero');
+                    const direccion = row.getAttribute('data-direccion');
+                    const telefono = row.getAttribute('data-telefono');
+                    const celular = row.getAttribute('data-celular');
+                    const correoInstitucional = row.getAttribute('data-correoInstitucional');
+                    const correoPersonal = row.getAttribute('data-correoPersonal');
+                    const fechaRegistro = row.getAttribute('data-fechaRegistro');
+                    const horaModificacion = row.getAttribute('data-horaModificacion');
+                    const fechaModificacion = row.getAttribute('data-fechaModificacion');
+                    const estado = row.getAttribute('data-estado');
+
+                    // Asigna los datos a los campos del modal
+                    document.getElementById('modalId').value = id;
+                    document.getElementById('modalNombre').value = nombre;
+                    document.getElementById('modalApellidoPaterno').value = apellidoPaterno;
+                    document.getElementById('modalApellidoMaterno').value = apellidoMaterno;
+                    document.getElementById('modalFoto').src = foto;
+                    document.getElementById('modalDocumentoIdentidad').value = documentoIdentidad;
+                    document.getElementById('modalNumeroDocumento').value = numeroDocumento;
+                    document.getElementById('modalFechaNacimiento').value = fechaNacimiento;
+                    document.getElementById('modalGenero').value = genero;
+                    document.getElementById('modalDireccion').value = direccion;
+                    document.getElementById('modalTelefono').value = telefono;
+                    document.getElementById('modalCelular').value = celular;
+                    document.getElementById('modalCorreoInstitucional').value = correoInstitucional;
+                    document.getElementById('modalCorreoPersonal').value = correoPersonal;
+                    document.getElementById('modalFechaRegistro').value = fechaRegistro;
+                    document.getElementById('modalHoraModificacion').value = horaModificacion;
+                    document.getElementById('modalFechaModificacion').value = fechaModificacion;
+                    document.getElementById('modalEstado').value = estado === "true" ? "ACTIVO" : "INACTIVO";
+
+                    // Muestra el modal
+                    var myModal = new bootstrap.Modal(document.getElementById('detallePsicologoModal'), {
+                        keyboard: false
+                    });
+                    myModal.show();
+                }
+            </script>
+            <!-- Fin Script Modal -->
+
+            <!-- Inicio Modal -->
+            <div class="modal fade " id="detallePsicologoModal" data-bs-backdrop="static" tabindex="-1"
+                 aria-labelledby="detallePsicologoModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detallePsicologoModalLabel">Detalle del Psicologo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row justify-content-center text-center">
+                                <div class="mb-3 col-md-6">
+                                    <img id="modalFoto" class="img-thumbnail rounded-circle" alt="Foto del psicólogo">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalId" class="form-label">ID:</label>
+                                    <input type="text" class="form-control" id="modalId" name="modalId" readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalFechaRegistro" class="form-label">Fecha de Registro:</label>
+                                    <input type="text" class="form-control" id="modalFechaRegistro" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalHoraModificacion" class="form-label">Hora de Modificación:</label>
+                                    <input type="text" class="form-control" id="modalHoraModificacion" readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalFechaModificacion" class="form-label">Fecha de Modificación:</label>
+                                    <input type="text" class="form-control" id="modalFechaModificacion" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label for="modalNombre" class="form-label">Nombre:</label>
+                                    <input type="text" class="form-control" id="modalNombre" readonly>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="modalApellidoPaterno" class="form-label">Apellido Paterno:</label>
+                                    <input type="text" class="form-control" id="modalApellidoPaterno" readonly>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="modalApellidoMaterno" class="form-label">Apellido Materno:</label>
+                                    <input type="text" class="form-control" id="modalApellidoMaterno" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalDocumentoIdentidad" class="form-label">Tipo de Documento:</label>
+                                    <input type="text" class="form-control" id="modalDocumentoIdentidad" readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalNumeroDocumento" class="form-label">Número de Documento:</label>
+                                    <input type="text" class="form-control" id="modalNumeroDocumento" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalFechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
+                                    <input type="text" class="form-control" id="modalFechaNacimiento" readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalGenero" class="form-label">Género:</label>
+                                    <input type="text" class="form-control" id="modalGenero" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-12">
+                                    <label for="modalDireccion" class="form-label">Dirección:</label>
+                                    <input type="text" class="form-control" id="modalDireccion" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalTelefono" class="form-label">Teléfono:</label>
+                                    <input type="text" class="form-control" id="modalTelefono" readonly>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalCelular" class="form-label">Celular:</label>
+                                    <input type="text" class="form-control" id="modalCelular" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-12">
+                                    <label for="modalCorreoInstitucional" class="form-label">Correo Institucional:</label>
+                                    <input type="text" class="form-control" id="modalCorreoInstitucional" readonly>
+                                </div>
+                                <div class="mb-3 col-md-12">
+                                    <label for="modalCorreoPersonal" class="form-label">Correo Personal:</label>
+                                    <input type="text" class="form-control" id="modalCorreoPersonal" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label for="modalEstado" class="form-label">Estado:</label>
+                                    <input type="text" class="form-control" id="modalEstado" readonly>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal -->
+
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+                <!-- Content -->
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4">
+                        <span class="text-muted fw-light">Psicólogo /</span> Gestión de Psicólogo
+                    </h4>
+
+                    <!-- Basic Bootstrap Table -->
+                    <div class="card">
+                        <h5 class="card-header">Psicólogos</h5>
+                        <div class="card-body">
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-striped text-center table-hover">
+                                    <!-- Inicio Cabecera -->
+                                    <thead>
+                                    <tr>
+                                        <th><strong>Código</strong></th>
+                                        <th><strong>Foto</strong></th>
+                                        <th><strong>Nombre</strong></th>
+                                        <th><strong>Tipo de Documento</strong></th>
+                                        <th><strong>Número de Documento</strong></th>
+                                        <th><strong>Ultima Modificación</strong></th>
+                                        <th><strong>Acciones</strong></th>
+                                    </tr>
+                                    </thead>
+                                    <!-- Fin Cabecera -->
+                                    <!-- Inicio Cuerpo de la tabla -->
+                                    <tbody class="table-border-bottom-0">
+                                    <tr th:each="detallepsicologo : ${detallespsicologos}"
+                                        th:data-id="${detallepsicologo.id}"
+                                        th:data-nombre="${detallepsicologo.nombre}"
+                                        th:data-apellidoPaterno="${detallepsicologo.apellidoPaterno}"
+                                        th:data-apellidoMaterno="${detallepsicologo.apellidoMaterno}"
+                                        th:data-foto="${detallepsicologo.foto}"
+                                        th:data-documentoIdentidad="${detallepsicologo.documentoIdentidad}"
+                                        th:data-numeroDocumento="${detallepsicologo.numeroDocumento}"
+                                        th:data-fechaNacimiento="${detallepsicologo.fechaNacimiento}"
+                                        th:data-genero="${detallepsicologo.genero}"
+                                        th:data-direccion="${detallepsicologo.direccion}"
+                                        th:data-telefono="${detallepsicologo.telefono}"
+                                        th:data-celular="${detallepsicologo.celular}"
+                                        th:data-correoInstitucional="${detallepsicologo.correoInstitucional}"
+                                        th:data-correoPersonal="${detallepsicologo.correoPersonal}"
+                                        th:data-usuario="${detallepsicologo.usuario.usuario}"
+                                        th:data-fechaRegistro="${detallepsicologo.fechaRegistro}"
+                                        th:data-horaModificacion="${detallepsicologo.horaModificacion}"
+                                        th:data-fechaModificacion="${detallepsicologo.fechaModificacion}"
+                                        th:data-estado="${detallepsicologo.estado}"
+                                        onclick="showModal(event, this)">
+                                        <td th:text="${detallepsicologo.id}" class="py-3"></td>
+                                        <td>
+                                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center text-center">
+                                                <li
+                                                        data-bs-toggle="tooltip"
+                                                        data-popup="tooltip-custom"
+                                                        data-bs-placement="top"
+                                                        class="avatar avatar-xs pull-up text-center"
+                                                        th:title="${detallepsicologo.nombre + ' ' + detallepsicologo.apellidoPaterno}">
+
+
+                                                    <img th:src="${detallepsicologo.foto}" alt="Avatar" class="rounded-circle" />
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td th:text="${detallepsicologo.nombre} + ' ' + ${detallepsicologo.apellidoPaterno}"></td>
+                                        <td th:text="${detallepsicologo.documentoIdentidad}"></td>
+                                        <td th:text="${detallepsicologo.numeroDocumento}"></td>
+                                        <td th:text="${detallepsicologo.fechaModificacion}"></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" th:href="@{/detallepsicologo/actualizar/{id}(id=${detallepsicologo.id})}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Editar</a>
+                                                    <a class="dropdown-item" th:href="@{/detallepsicologo/eliminar/{id}(id=${detallepsicologo.id})}">
+                                                        <i class="bx bx-trash me-1"></i> Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <!-- Fin Cuerpo de la tabla -->
+                                </table>
+                            </div>
+                            <br>
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-start mt-4">
+                                <a th:href="@{/detallepsicologo/registro}" class="btn btn-primary mb-2 mb-md-0">Registrar Nuevo Psicólogo</a>
+                                <a th:href="@{/detallepsicologo_log/listar}" class="btn btn-primary mb-2 mb-md-0">Log Psicólogo</a>
+                                <a th:href="@{/detallepsicologo/listarInactivos}" class="btn btn-primary mb-2 mb-md-0">Psicólogo Inactivos</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!--/ Basic Bootstrap Table -->
+                </div>
+
+                <!-- Content -->
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<!-- / Layout wrapper -->
+
+<!-- Personal JS -->
+<script th:src="@{/js/personaljs/busqueda.js}"></script>
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
+<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
+<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
+<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+<script th:src="@{/assets/vendor/js/menu.js}"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+<!-- Main JS -->
+<script th:src="@{/assets/js/main.js}"></script>
+
+<!-- Page JS -->
+<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer th:src="@{https://buttons.github.io/buttons.js}"></script>
+</body>
+</html>
